@@ -27,7 +27,7 @@ const Login = () => {
             setEmail('');
             setPassword('');
             setLoading(false);
-        } else {
+        } else if (data) {
             navigate('/');
         }
     };
