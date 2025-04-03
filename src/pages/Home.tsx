@@ -6,17 +6,18 @@ import { Loader2 } from 'lucide-react';
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-
 import supabase from '@/helper/supabaseClient';
+import { Database } from '@/types/supabase';
+
+type Message = Database['public']['Tables']['Messages']['Row'];
 
 const Home = () => {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -48,7 +49,7 @@ const Home = () => {
             setErrorMessage(error.message);
             setMessage('');
             setLoading(false);
-        } else {
+        } else if (data) {
             setErrorMessage('');
             setMessage('');
             setLoading(false);
