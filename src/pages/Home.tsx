@@ -40,21 +40,20 @@ const Home = () => {
         e.preventDefault();
         setLoading(true);
 
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from('Messages')
             .insert([
                 { sender: 'JPL', recipient: 'Whatney', content: message },
             ]);
         if (error) {
             setErrorMessage(error.message);
-            setMessage('');
-            setLoading(false);
-        } else if (data) {
+        } else {
             setErrorMessage('');
-            setMessage('');
-            setLoading(false);
             setRefresh(true);
         }
+
+        setMessage('');
+        setLoading(false);
     };
 
     return (
